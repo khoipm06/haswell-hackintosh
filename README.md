@@ -12,42 +12,39 @@ This repository contains the EFI folder and configuration for a Hackintosh build
 - **GPU**: Nvidia GTX 650 (GK-107 variant), iGPU should work as well
 - **Storage**: Kingspec 120G SSD
 - **WiFi**: None wireless card installed
-- **Bluetooth**: every USB dongle should work as well as BlueToolFixup kext installed
+- **Bluetooth**: Every USB dongle should work as well as BlueToolFixup kext installed
 
 ## Features
 
 - Full support for Haswell CPUs.
-- Include the GoldenGate theme from Acidanthera for better visual experience, you can change it as you like such as tweak the background image,...
-- Fully mapped USB for Asus H81M-K motherboard (included back and front panel, mapped via USBPorts by Hackintool on macOS).
-- Audio support via AppleALC
-- Ethernet support via RealtekRTL8111 kext
-- Sleep/Wake functionality works
-- Airdrop and iServices support with proper SMBIOS configuration
+- Includes the GoldenGate theme from Acidanthera for better visual experience. You can change it as you like, such as tweaking the background image.
+- Fully mapped USB for Asus H81M-K motherboard (includes back and front panel, mapped via USBPorts by Hackintool on macOS).
+- Audio support via AppleALC.
+- Ethernet support via RealtekRTL8111 kext.
+- Sleep/Wake functionality works.
+- AirDrop and iServices support with proper SMBIOS configuration.
 
-> [!CAUTION]
-> - For most haswell CPUs, this configuration should work without additional CPU-specific patches except for non-supported CPUs like Pentium and Celeron. You'll need further tweaks for those CPUs by emulating cpuid to a supported one.
-
-> | Key | Value |
-> | :-: | :---: |
-> |  Cpuid1Data | C0 06 03 00 00 00 00 00 00 00 00 00 00 00 00 00 |
-> |  Cpuid1Mask | FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 |
-
-> - My build uses Nvidia GTX 650 (GK-107 variant), which is Kepler based, so no web drivers are needed and should work out of the box until macOS Big Sur. Currently, my EFI build supports up to macOS Monterey 12.7.6 although Apple had removed support for Kepler GPUs in macOS Monterey, you will need to use this [Geforce-Kepler-patcher](https://github.com/chris1111/Geforce-Kepler-patcher) or [other kepler patch from OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher) to bring back the removed kexts (Also make sure to change your SMBIOS to iMac17,1 or higher to match the macOS version).
-> - The reason why I deliberately emphasize on the GTX 650 GK-107 variant is that other GTX 650 variants (like GK106) have serious issue regarding VRAM leakage which cause distortions and instability in macOS so it's not supported by those patches yet.
-
->   - Sadly, if you want to upgrade to higher version you will need to switch to a supported GPU like AMD RX 560 or higher or disable the Nvidia GPU and use iGPU only.
+> [!WARNING]
+> - For most Haswell CPUs, this configuration should work without additional CPU-specific patches except for non-supported CPUs like Pentium and Celeron. You'll need further tweaks for those CPUs by emulating CPUID to a supported one.
+>
+> | Key       | Value                                      |
+> |:----------|:-------------------------------------------|
+> | Cpuid1Data | C0 06 03 00 00 00 00 00 00 00 00 00 00 00 00 00 |
+> | Cpuid1Mask | FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 |
+>
+>   - My build uses Nvidia GTX 650 (GK-107 variant), which is Kepler-based, so no web drivers are needed and should work out of the box until macOS Big Sur. Currently, my EFI build supports up to macOS Monterey 12.7.6 although Apple had removed support for Kepler GPUs in macOS Monterey. You will need to use this [Geforce-Kepler-patcher](https://github.com/chris1111/Geforce-Kepler-patcher) or [other Kepler patch from OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher) to bring back the removed kexts (also make sure to change your SMBIOS to iMac17,1 or higher to match the macOS version).
+> - The reason why I deliberately emphasize on the GTX 650 GK-107 variant is that other GTX 650 variants (like GK106) have serious issues regarding VRAM leakage which cause distortions and instability in macOS, so it's not supported by those patches yet.
+>     - Sadly, if you want to upgrade to a higher version, you will need to switch to a supported GPU like AMD RX 560 or higher, or disable the Nvidia GPU and use iGPU only.
 
 > [!NOTE]
 > - For iServices to work properly, ensure your serial number is unique and has been used on at least one real Apple device.
-> - This motherboard is special when using ALC897 not the common ALC887, becareful when choosing alcid for it.
+> - This motherboard is special when using ALC897, not the common ALC887. Be careful when choosing alcid for it.
 
-# Not working / Unsupported
+## Not Working / Unsupported
 
 - HDMI audio output (haven't tried it yet, my monitor only supports VGA).
-- Native cpu power management (may work with further tweaks) so power consumption may be higher than expected
-compare to usage on windows.
-- Android/iOS tethering doesn't work out of the box (need fixes).
-
+- Native CPU power management (may work with further tweaks), so power consumption may be higher than expected compared to usage on Windows.
+- Android/iOS tethering doesn't work out of the box (needs fixes).
 
 ## Installation Steps
 
@@ -61,8 +58,7 @@ Follow [Dortania's OpenCore Guide](https://dortania.github.io/OpenCore-Install-G
 ## Post-Installation
 
 - Use tools like Hackintool or IORegistryExplorer for troubleshooting.
-- Enable iMessage/Facetime by following [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html). Mostly by your improper SMBIOS settings.
-More over, your serial should be used by at least one real Apple device for best chance of success.
+- Enable iMessage/FaceTime by following [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html). Mostly by your improper SMBIOS settings. Moreover, your serial should be used by at least one real Apple device for the best chance of success.
 
 ## Troubleshooting
 
@@ -70,14 +66,14 @@ More over, your serial should be used by at least one real Apple device for best
 
 - **Kernel Panic**: Check your config.plist for errors. Use OC Configurator or ProperTree.
 - **No Audio**: Ensure AppleALC is configured correctly.
-- **USB Issues**: Use USBPorts kext or USBMap kext, follow the Dortania USB mapping guide.
+- **USB Issues**: Use USBPorts kext or USBMap kext. Follow the Dortania USB mapping guide.
 - **Graphics Problems**: Adjust WhateverGreen properties.
 
 ## Credits
 
-- [Dortania](https://dortania.github.io/) for OpenCore and guides
-- [Acidanthera](https://github.com/acidanthera) for kexts/tools and theme used in this build
-- [Chris1111](https://github.com/chris1111) for the Geforce Kepler patcher
+- [Dortania](https://dortania.github.io/) for OpenCore and guides.
+- [Acidanthera](https://github.com/acidanthera) for kexts/tools and theme used in this build.
+- [Chris1111](https://github.com/chris1111) for the Geforce Kepler patcher.
 
 ## Disclaimer
 
