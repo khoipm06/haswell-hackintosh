@@ -24,13 +24,14 @@ This repository contains the EFI folder and configuration for a Hackintosh build
 - Sleep/Wake functionality works.
 - AirDrop and iServices support with proper SMBIOS configuration.
 
-> [!WARNING]
+> [!CAUTION]
 > - For most Haswell CPUs, this configuration should work without additional CPU-specific patches except for non-supported CPUs like Pentium and Celeron. You'll need further tweaks for those CPUs by emulating CPUID to a supported one.
+>  - Try applying the following settings in config.plist under `Kernel -> Emulate` as below (I got a working hack on Pentium G3220):
 >
-> | Key       | Value                                      |
-> |:----------|:-------------------------------------------|
-> | Cpuid1Data | C0 06 03 00 00 00 00 00 00 00 00 00 00 00 00 00 |
-> | Cpuid1Mask | FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 |
+>   | Key       | Value                                      |
+>   |:----------|:-------------------------------------------|
+>   | Cpuid1Data | C0 06 03 00 00 00 00 00 00 00 00 00 00 00 00 00 |
+>   | Cpuid1Mask | FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 |
 >
 >   - My build uses Nvidia GTX 650 (GK-107 variant), which is Kepler-based, so no web drivers are needed and should work out of the box until macOS Big Sur. Currently, my EFI build supports up to macOS Monterey 12.7.6 although Apple had removed support for Kepler GPUs in macOS Monterey. You will need to use this [Geforce-Kepler-patcher](https://github.com/chris1111/Geforce-Kepler-patcher) or [other Kepler patch from OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher) to bring back the removed kexts (also make sure to change your SMBIOS to iMac17,1 or higher to match the macOS version).
 > - The reason why I deliberately emphasize on the GTX 650 GK-107 variant is that other GTX 650 variants (like GK106) have serious issues regarding VRAM leakage which cause distortions and instability in macOS, so it's not supported by those patches yet.
