@@ -1,4 +1,4 @@
-# Hasswell Hackintosh
+# Haswell Hackintosh
 
 ## Overview
 
